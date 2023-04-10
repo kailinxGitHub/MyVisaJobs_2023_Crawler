@@ -23,7 +23,7 @@ for row in rows:
 new_dict = dict(list(name_link_dict.items())[1:])
 
 for name, link in new_dict.items():
-    page = requests.get('https://www.myvisajobs.com/Visa-Sponsor/Microsoft/356252.htm')
+    page = requests.get(link)
     soup = BeautifulSoup(page.text, 'html.parser')
     td_tags = soup.find_all('td')
 

@@ -46,22 +46,24 @@ for name, link in new_dict.items():
         for letter in letters_to_remove:
             item = item.replace(letter, "")
         name_pattern = re.compile(r"[a-zA-Z\s]+")
+        # name_pattern = re.compile(r"\b[A-Za-z&]+\b")
         uni_name = name_pattern.search(item).group()
         number_pattern = re.compile(r"\d+")
         number = number_pattern.search(item).group()
         organized_list[uni_name] = number
+        print(uni_name)
 
 
-    # Table
-    table = PrettyTable()
-    for uni_name, number in organized_list.items():
-        table.add_row([uni_name, number])
+    # # Table
+    # table = PrettyTable()
+    # for uni_name, number in organized_list.items():
+    #     table.add_row([uni_name, number])
 
-    # CSV
-    csv_name = name.replace(" ", "")+".csv"
-    table_data = [(key, value) for key, value in organized_list.items()]
-    with open(csv_name, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow([name])
-        writer.writerow(['Name', 'Number'])
-        writer.writerows(table_data)
+    # # CSV
+    # csv_name = name.replace(" ", "")+".csv"
+    # table_data = [(key, value) for key, value in organized_list.items()]
+    # with open(csv_name, 'w', newline='') as csvfile:
+    #     writer = csv.writer(csvfile)
+    #     writer.writerow([name])
+    #     writer.writerow(['Name', 'Number'])
+    #     writer.writerows(table_data)

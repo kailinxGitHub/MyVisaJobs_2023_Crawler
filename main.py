@@ -45,7 +45,7 @@ for name, link in new_dict.items():
         letters_to_remove = "()"
         for letter in letters_to_remove:
             item = item.replace(letter, "")
-        name_pattern = re.compile(r"[^\(\)]+")
+        name_pattern = re.compile(r"[a-zA-Z\s]+") # todo fix symbols being cut out
         uni_name = name_pattern.search(item).group()
         number_pattern = re.compile(r"\d+")
         number = number_pattern.search(item).group()
@@ -56,7 +56,7 @@ for name, link in new_dict.items():
     for uni_name, number in organized_list.items():
         table.add_row([uni_name, number])
 
-    # CSV
+    # CSV # todo fix error
     csv_name = name.replace(" ", "")+".csv"
     table_data = [(key, value) for key, value in organized_list.items()]
     with open(csv_name, 'w', newline='') as csvfile:

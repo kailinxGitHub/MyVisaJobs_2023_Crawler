@@ -26,10 +26,3 @@ for row in rows:
 
 #cleaning
 new_dict = dict(list(name_link_dict.items())[1:])
-
-for name, link in new_dict.items():
-    name
-
-# dict_iter = iter(new_dict.items())
-# first_pair = next(dict_iter)
-# print(first_pair)

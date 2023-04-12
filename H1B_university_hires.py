@@ -171,13 +171,11 @@ def main():
             if filename.endswith('.csv'):
                 os.remove(f'{csv_folder}/{filename}')
         st.success("All CSV files have been cleared.")
-    
-    st.header("Companies and Universities")
-
-    university_data = get_university_data()
-    st.write(university_data)
-    
+     
     def start():
+        university_data = get_university_data()
+        st.write(university_data)
+        st.header("Companies and Universities")
         st.header("Filter by Company")
         company_name = st.selectbox("Select a company", sorted(university_data['Company'].unique()))
         filtered_data = university_data[university_data['Company'] == company_name]

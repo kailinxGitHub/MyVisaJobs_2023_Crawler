@@ -156,6 +156,6 @@ def main():
             if filename.endswith('.csv'):
                 os.remove(f'{csv_folder}/{filename}')
         st.success("All CSV files have been cleared.")
-
+        st.experimental_rerun()
 
 main()

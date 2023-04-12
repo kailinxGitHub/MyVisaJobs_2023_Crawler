@@ -52,16 +52,18 @@ for name, link in new_dict.items():
         organized_list[uni_name] = number
 
     # Table
-    table = PrettyTable()
+    table_title = f"{name}_Table"
+    table = PrettyTable(['Name', 'Number'])
     for uni_name, number in organized_list.items():
         table.add_row([uni_name, number])
 
-    # CSV # todo fix error
-    valid_name = ''.join(char for char in name if char.isalnum())
-    csv_name = f"{valid_name}.csv"
-    table_data = [(key, value) for key, value in organized_list.items()]
-    with open(csv_name, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow([name])
-        writer.writerow(['Name', 'Number'])
-        writer.writerows(table_data)
+    # # CSV # todo fix error
+    # valid_name = ''.join(char for char in name if char.isalnum())
+    # csv_name = f"{valid_name}.csv"
+    # table_data = [(key, value) for key, value in organized_list.items()]
+    # with open(csv_name, 'w', newline='') as csvfile:
+    #     writer = csv.writer(csvfile)
+    #     writer.writerow([name])
+    #     writer.writerow(['Name', 'Number'])
+    #     writer.writerows(table_data)
+

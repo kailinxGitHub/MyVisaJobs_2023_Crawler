@@ -148,7 +148,7 @@ def main():
     if "search_started" not in st.session_state:
         st.session_state.search_started = False
 
-    university_data = pd.DataFrame()  # Initialize university_data as an empty DataFrame
+    university_data = get_university_data()
 
     st.header("Reset Data")
     reset_button = st.button("Reset")
@@ -164,19 +164,19 @@ def main():
 
     if run_button:
         st.session_state.search_started = True
-        university_data = get_university_data()
 
     if st.session_state.search_started:
         filter_company_placeholder = st.empty()
         filter_company_placeholder.header("Filter by Company")
-        company_name = filter_company_placeholder.selectbox("Select a company", sorted(university_data['Company'].unique()))
+        company_name = st.selectbox("Select a company", sorted(university_data['Company'].unique()))
         filtered_data = university_data[university_data['Company'] == company_name]
         filter_company_placeholder.write(filtered_data)
 
         filter_university_placeholder = st.empty()
         filter_university_placeholder.header("Filter by University")
-        university_name = filter_university_placeholder.selectbox("Select a university", sorted(university_data['University'].unique()))
+        university_name = st.selectbox("Select a university", sorted(university_data['University'].unique()))
         filtered_data_by_university = university_data[university_data['University'] == university_name]
         filter_university_placeholder.write(filtered_data_by_university)
+
 
 main()

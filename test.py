@@ -57,6 +57,7 @@ def get_university_data():
             name_link_dict[name] = link
     # Cleaning
     new_dict = dict(list(name_link_dict.items())[1:])
+    # todo: if there is less than 4 rows then discard it
 
     data = []
     for name, link in new_dict.items():

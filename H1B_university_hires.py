@@ -121,19 +121,17 @@ def get_university_data():
     # Save the data to CSV files and return the data as a pandas DataFrame.
     return pd.DataFrame(data, columns=['Company', 'University', 'Number'])
 
-@st.cache(suppress_st_warning=True)
-def get_cached_university_data():
-    return get_university_data()
-
 def main():
     st.set_page_config(page_title="University Recruitment Info", layout="wide")
     st.title("University Recruitment Info")
 
-    university_data = pd.DataFrame()  # Initialize university_data as an empty DataFrame
+    if 'university_data' not in st.session_state:
+        st.session_state.university_data = pd.DataFrame()
 
-    st.header("Reset Data")
-    reset_button = st.button("Reset")
-    run_button = st.button("Run")
+    with st.sidebar.header("Reset Data"):
+        reset_button = st.sidebar.button("Reset")
+        options = st.multiselect("All", "2023 H1B Visa Reports Page 1", "2023 H1B Visa Reports Page 2", "2023 H1B Visa Reports Page 3", "2023 H1B Visa Reports Page 4", "Top 100 Green Card Sponsors Page 1", "Top 100 Green Card Sponsors Page 2", "Top 100 Green Card Sponsors Page 3", "Top 100 Green Card Sponsors Page 4")
+        run_button = st.sidebar.button("Run")
 
     if reset_button:
         csv_folder = 'csv'
@@ -141,23 +139,22 @@ def main():
             if filename.endswith('.csv'):
                 os.remove(f'{csv_folder}/{filename}')
         st.success("All CSV files have been cleared.")
-        if 'university_data' in st.cache_info():
-            st.cache_clear()
+        st.session_state.university_data = pd.DataFrame()
 
     if run_button:
-        university_data = get_cached_university_data()
+        st.session_state.university_data = get_university_data()
 
-    if not university_data.empty:
-        filter_company_placeholder = st.empty()
+    if not st.session_state.university_data.empty:
+        filter_company_placeholder = st
         filter_company_placeholder.header("Filter by Company")
-        company_name = filter_company_placeholder.selectbox("Select a company", sorted(university_data['Company'].unique()))
-        filtered_data = university_data[university_data['Company'] == company_name]
+        company_name = filter_company_placeholder.selectbox("Select a company", sorted(st.session_state.university_data['Company'].unique()))
+        filtered_data = st.session_state.university_data[st.session_state.university_data['Company'] == company_name]
         filter_company_placeholder.write(filtered_data)
 
-        filter_university_placeholder = st.empty()
+        filter_university_placeholder = st
         filter_university_placeholder.header("Filter by University")
-        university_name = filter_university_placeholder.selectbox("Select a university", sorted(university_data['University'].unique()))
-        filtered_data_by_university = university_data[university_data['University'] == university_name]
+        university_name = filter_university_placeholder.selectbox("Select a university", sorted(st.session_state.university_data['University'].unique()))
+        filtered_data_by_university = st.session_state.university_data[st.session_state.university_data['University'] == university_name]
         filter_university_placeholder.write(filtered_data_by_university)
 
 

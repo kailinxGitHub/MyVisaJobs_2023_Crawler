@@ -8,15 +8,12 @@ import os
 import shutil
 
 def save_company_data_to_csv(name, organized_list):
-    if not organized_list:  # Check if the organized_list is empty
-        return  # If it's empty, don't create a CSV file
-
     if not os.path.exists('csv'):
         os.makedirs('csv')
-
+    
     valid_name = ''.join(char for char in name if char.isalnum())
     csv_name = f"csv/{valid_name}.csv"
-
+    
     table_data = [(key, value) for key, value in organized_list.items()]
     with open(csv_name, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
@@ -39,33 +36,23 @@ def load_all_company_data():
     
     return pd.DataFrame(data, columns=['Company', 'University', 'Number'])
 
-def get_university_data(options):
+def get_university_data():
     # Check if the CSV folder already exists and has files, and load the data from the files.
     if os.path.exists('csv') and any(file.endswith('.csv') for file in os.listdir('csv')):
         return load_all_company_data()
     
-    base_url_h1b = "https://www.myvisajobs.com/Software-Engineer"
-    url_suffix_h1b = "-2023JT.htm"
+    base_url = 'https://www.myvisajobs.com/Software-Engineer'
+    url_suffix = '-2023JT.htm'
+    name_link_dict = {}
 
-    base_url_gc = "https://www.myvisajobs.com/Reports/2023-Green-Card-Sponsor.aspx"
+    # Loop through the desired number of pages (1 to 4 in this case)
+    for page_number in range(1, 5):
+        # Generate the URL for the current page
+        if page_number == 1:
+            page_url = f'{base_url}{url_suffix}'
+        else:
+            page_url = f'{base_url}_{page_number}{url_suffix}'
 
-    pages_map = {
-        "2023 H1B Visa Reports Page 1": f"{base_url_h1b}{url_suffix_h1b}",
-        "2023 H1B Visa Reports Page 2": f"{base_url_h1b}_2{url_suffix_h1b}",
-        "2023 H1B Visa Reports Page 3": f"{base_url_h1b}_3{url_suffix_h1b}",
-        "2023 H1B Visa Reports Page 4": f"{base_url_h1b}_4{url_suffix_h1b}",
-        "Top 100 Green Card Sponsors Page 1": f"{base_url_gc}",
-        "Top 100 Green Card Sponsors Page 2": f"{base_url_gc}?P=2",
-        "Top 100 Green Card Sponsors Page 3": f"{base_url_gc}?P=3",
-        "Top 100 Green Card Sponsors Page 4": f"{base_url_gc}?P=4",
-    }
-
-    if "All" in options:
-        urls_to_scrape = list(pages_map.values())
-    else:
-        urls_to_scrape = [pages_map[option] for option in options]
-    
-    for page_url in urls_to_scrape:
         # Scrape the current page
         page = requests.get(page_url)
         soup = BeautifulSoup(page.text, 'html.parser')
@@ -81,11 +68,12 @@ def get_university_data(options):
                 first_part = 'https://www.myvisajobs.com/'
                 second_part = row.find('a')['href']
                 link = first_part + second_part
-                pages_map[name] = link
+                name_link_dict[name] = link
         # Cleaning
+        new_dict = dict(list(name_link_dict.items())[1:])
 
     data = []
-    for name, link in pages_map.items():
+    for name, link in new_dict.items():
         page = requests.get(link)
         soup = BeautifulSoup(page.text, 'html.parser')
         td_tags = soup.find_all('td')
@@ -96,16 +84,10 @@ def get_university_data(options):
         for td in td_tags:
             td_list = [i for i in td]
             combined_list.extend(td_list)
-        found_item = ""
         for indexposition in combined_list:
             if "College:" == indexposition:
                 i_index = combined_list.index(indexposition)
                 found_item = combined_list[i_index+1]
-
-        if isinstance(found_item, str):
-            mapped_found_item = list(map(str, found_item.split(";")))
-        else:
-            mapped_found_item = []
 
         # Mapping the items
         mapped_found_item = list(map(str, found_item.split(";")))
@@ -175,7 +157,7 @@ def main():
         st.session_state.university_data = pd.DataFrame()
 
     if run_button:
-        st.session_state.university_data = get_university_data(options)
+        st.session_state.university_data = get_university_data()
 
     if not st.session_state.university_data.empty:
         filter_company_placeholder = st

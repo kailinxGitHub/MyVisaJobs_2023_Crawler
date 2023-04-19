@@ -130,8 +130,23 @@ def main():
 
     with st.sidebar.header("Reset Data"):
         reset_button = st.sidebar.button("Reset")
-        run_button = st.sidebar.button("Run")
         # options = st.multiselect("All", "2023 H1B Visa Reports Page 1", "2023 H1B Visa Reports Page 2", "2023 H1B Visa Reports Page 3", "2023 H1B Visa Reports Page 4", "Top 100 Green Card Sponsors Page 1", "Top 100 Green Card Sponsors Page 2", "Top 100 Green Card Sponsors Page 3", "Top 100 Green Card Sponsors Page 4")
+        options = st.sidebar.multiselect(
+            "Select pages:",
+            options=[
+                "All",
+                "2023 H1B Visa Reports Page 1",
+                "2023 H1B Visa Reports Page 2",
+                "2023 H1B Visa Reports Page 3",
+                "2023 H1B Visa Reports Page 4",
+                "Top 100 Green Card Sponsors Page 1",
+                "Top 100 Green Card Sponsors Page 2",
+                "Top 100 Green Card Sponsors Page 3",
+                "Top 100 Green Card Sponsors Page 4",
+            ],
+            default=[],
+        )
+        run_button = st.sidebar.button("Run")
 
     if reset_button:
         csv_folder = 'csv'

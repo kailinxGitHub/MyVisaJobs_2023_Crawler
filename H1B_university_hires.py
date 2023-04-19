@@ -79,9 +79,11 @@ def get_university_data(options):
                 name = td_tags[1].get_text().strip()
                 # link
                 first_part = 'https://www.myvisajobs.com/'
-                second_part = row.find('a')['href']
-                link = first_part + second_part
-                pages_map[name] = link
+                link_element = row.find('a')
+                if link_element:
+                    second_part = link_element['href']
+                    link = first_part + second_part
+                    pages_map[name] = link
         # Cleaning
 
     data = []
@@ -142,16 +144,18 @@ def get_university_data(options):
 def main():
     st.set_page_config(page_title="University Recruitment Info", layout="wide")
     st.title("University Recruitment Info")
+    st.subheader("Note: Reset every time after use!")
+    st.subheader("Note: All of the data is based on the GREEN CARD PROFILE!")
 
     if 'university_data' not in st.session_state:
         st.session_state.university_data = pd.DataFrame()
 
     with st.sidebar.header("Reset Data"):
         reset_button = st.sidebar.button("Reset")
-        # options = st.multiselect("All", "2023 H1B Visa Reports Page 1", "2023 H1B Visa Reports Page 2", "2023 H1B Visa Reports Page 3", "2023 H1B Visa Reports Page 4", "Top 100 Green Card Sponsors Page 1", "Top 100 Green Card Sponsors Page 2", "Top 100 Green Card Sponsors Page 3", "Top 100 Green Card Sponsors Page 4")
+
         options = st.sidebar.multiselect(
-            "Select pages:",
-            options=[
+            "Select pages to scrape",
+            [
                 "All",
                 "2023 H1B Visa Reports Page 1",
                 "2023 H1B Visa Reports Page 2",
@@ -162,8 +166,8 @@ def main():
                 "Top 100 Green Card Sponsors Page 3",
                 "Top 100 Green Card Sponsors Page 4",
             ],
-            default=[],
         )
+
         run_button = st.sidebar.button("Run")
 
     if reset_button:
@@ -173,6 +177,8 @@ def main():
                 os.remove(f'{csv_folder}/{filename}')
         st.success("All CSV files have been cleared.")
         st.session_state.university_data = pd.DataFrame()
+        options = []
+
 
     if run_button:
         st.session_state.university_data = get_university_data(options)

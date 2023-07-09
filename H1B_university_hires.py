@@ -196,34 +196,4 @@ def main():
         filter_university_placeholder.write(filtered_data_by_university)
 
 
-# def main():
-#     st.set_page_config(page_title="University Recruitment Info", layout="wide")
-#     st.title("University Recruitment Info")
-#     run_button = st.button("Run")
-#     reset_button = st.button("Reset")
-
-#     def start():
-#         university_data = get_university_data()
-#         st.write(university_data)
-#         st.header("Companies and Universities")
-#         st.header("Filter by Company")
-#         company_name = st.selectbox("Select a company", sorted(university_data['Company'].unique()))
-#         filtered_data = university_data[university_data['Company'] == company_name]
-#         st.write(filtered_data)
-
-#         st.header("Filter by University")
-#         university_name = st.selectbox("Select a university", sorted(university_data['University'].unique()))
-#         filtered_data_by_university = university_data[university_data['University'] == university_name]
-#         st.write(filtered_data_by_university)
-
-#     if run_button:
-#         start()
-
-#     if reset_button:
-#         csv_folder = 'csv'
-#         for filename in os.listdir(csv_folder):
-#             if filename.endswith('.csv'):
-#                 os.remove(f'{csv_folder}/{filename}')
-#         st.success("All CSV files have been cleared.")
-
 main()

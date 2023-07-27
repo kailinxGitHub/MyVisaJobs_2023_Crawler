@@ -10,6 +10,7 @@ def save_company_data_to_csv(name, organized_list):
     if not organized_list:  # Check if the organized_list is empty
         return  # If it's empty, don't create a CSV file
 
+    # if csv does not exist
     if not os.path.exists('csv'):
         os.makedirs('csv')
 

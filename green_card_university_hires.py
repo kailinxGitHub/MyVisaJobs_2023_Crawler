@@ -186,18 +186,22 @@ def main():
     if not st.session_state.university_data.empty:
         filter_company_placeholder = st
         filter_company_placeholder.header("Filter by Company")
-        company_name = filter_company_placeholder.selectbox("Select a company", sorted(st.session_state.university_data['Company'].unique()))
+        companies = sorted(st.session_state.university_data['Company'].unique())
+        default_company = 'Amazon Web Services'  # Replace this with the actual name of the default company
+        default_index = companies.index(default_company) if default_company in companies else 0
+        company_name = filter_company_placeholder.selectbox("Select a company", companies, index=default_index)
         filtered_data = st.session_state.university_data[st.session_state.university_data['Company'] == company_name]
         sorted_data = filtered_data.sort_values('Number', ascending=False)  # Corrected column name
         filter_company_placeholder.write(sorted_data)
 
-        filter_university_placeholder = st 
+        filter_university_placeholder = st
         filter_university_placeholder.header("Filter by University")
-        university_name = filter_university_placeholder.selectbox("Select a university", sorted(st.session_state.university_data['University'].unique()))
+        universities = sorted(st.session_state.university_data['University'].unique())
+        default_university = 'Northeastern University'  # Replace this with the actual name of the default university
+        default_index = universities.index(default_university) if default_university in universities else 0
+        university_name = filter_university_placeholder.selectbox("Select a university", universities, index=default_index)
         filtered_data_by_university = st.session_state.university_data[st.session_state.university_data['University'] == university_name]
         sorted_filtered_data_by_university = filtered_data_by_university.sort_values('Number', ascending=False)  # Corrected column name
         filter_university_placeholder.write(sorted_filtered_data_by_university)
-
-
 
 main()

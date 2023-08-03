@@ -188,13 +188,16 @@ def main():
         filter_company_placeholder.header("Filter by Company")
         company_name = filter_company_placeholder.selectbox("Select a company", sorted(st.session_state.university_data['Company'].unique()))
         filtered_data = st.session_state.university_data[st.session_state.university_data['Company'] == company_name]
-        filter_company_placeholder.write(filtered_data)
+        sorted_data = filtered_data.sort_values('Number', ascending=False)  # Corrected column name
+        filter_company_placeholder.write(sorted_data)
 
-        filter_university_placeholder = st
+        filter_university_placeholder = st 
         filter_university_placeholder.header("Filter by University")
         university_name = filter_university_placeholder.selectbox("Select a university", sorted(st.session_state.university_data['University'].unique()))
         filtered_data_by_university = st.session_state.university_data[st.session_state.university_data['University'] == university_name]
-        filter_university_placeholder.write(filtered_data_by_university)
+        sorted_filtered_data_by_university = filtered_data_by_university.sort_values('Number', ascending=False)  # Corrected column name
+        filter_university_placeholder.write(sorted_filtered_data_by_university)
+
 
 
 main()

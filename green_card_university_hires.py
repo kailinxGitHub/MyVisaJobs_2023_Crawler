@@ -110,7 +110,6 @@ def get_university_data(options):
             mapped_found_item = []
 
         # Mapping the items
-        mapped_found_item = list(map(str, found_item.split(";")))
         organized_list = {}
         for item in mapped_found_item:
             letters_to_remove = "()"
@@ -119,7 +118,8 @@ def get_university_data(options):
             name_pattern = re.compile(r"[a-zA-Z\s]+")
             uni_name_match = name_pattern.search(item)
             if uni_name_match:
-                uni_name = uni_name_match.group()
+                uni_name = uni_name_match.group().strip()  # strip leading and trailing spaces
+                uni_name = re.sub(' +', ' ', uni_name)  # replace multiple spaces with a single space
             else:
                 continue
             number_pattern = re.compile(r"\d+")
@@ -130,6 +130,8 @@ def get_university_data(options):
                 continue
             organized_list[uni_name] = number
 
+        # cleaning company name
+        name = re.sub(' +', ' ', name.strip())
 
                     # Save the company's data to a CSV file.
         save_company_data_to_csv(name, organized_list)
@@ -192,7 +194,7 @@ def main():
         company_name = filter_company_placeholder.selectbox("Select a company", companies, index=default_index)
         filtered_data = st.session_state.university_data[st.session_state.university_data['Company'] == company_name]
         sorted_data = filtered_data.sort_values('Number', ascending=False)  # Corrected column name
-        filter_company_placeholder.write(sorted_data)
+        filter_company_placeholder.table(sorted_data)
 
         filter_university_placeholder = st
         filter_university_placeholder.header("Filter by University")
@@ -202,6 +204,6 @@ def main():
         university_name = filter_university_placeholder.selectbox("Select a university", universities, index=default_index)
         filtered_data_by_university = st.session_state.university_data[st.session_state.university_data['University'] == university_name]
         sorted_filtered_data_by_university = filtered_data_by_university.sort_values('Number', ascending=False)  # Corrected column name
-        filter_university_placeholder.write(sorted_filtered_data_by_university)
+        filter_university_placeholder.table(sorted_filtered_data_by_university)
 
 main()

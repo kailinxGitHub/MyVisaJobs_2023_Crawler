@@ -5,7 +5,7 @@ from prettytable import PrettyTable
 import csv
 
 # Getting the links
-page = requests.get('https://www.myvisajobs.com/Software-Engineer-2023JT.htm')
+page = requests.get("https://www.myvisajobs.com/Software-Engineer-2023JT.htm")
 soup = BeautifulSoup(page.text, 'html.parser')
 table = soup.find('table', class_='tbl')
 rows = table.find_all('tr')

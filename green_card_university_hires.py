@@ -133,7 +133,7 @@ def get_university_data(options):
         # cleaning company name
         name = re.sub(' +', ' ', name.strip())
 
-                    # Save the company's data to a CSV file.
+        # Save the company's data to a CSV file.
         save_company_data_to_csv(name, organized_list)
 
         # Add the company's data to the main data list.

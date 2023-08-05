@@ -40,18 +40,30 @@ def cleaning_green_card_applicant_profile(category_raw_list):
         data.append([name, cat_items_name, int(number)])
     print(pd.DataFrame(data, columns=['Company', 'University', 'Number']))
 
-# Finding the key content init
+## Finding the key content init
 page_url = "https://www.myvisajobs.com/Visa-Sponsor/Amazon-Com-Services/1352502.htm"
 page = requests.get(page_url)
 soup = BeautifulSoup(page.text, 'html.parser')
-td_tags = soup.find_all('td')
+td_tags = soup.find_all('td', attrs={'align': 'right', 'valign': 'top'})
 
-## Code for parsing university for every company
-# Finding the keyword
+# # Op1: Getting code from start to end
+# if td_tags:
+#     first_td = str(td_tags[0])
+#     last_td = str(td_tags[-1])
+
+#     html_content = str(soup)
+#     start = html_content.find(first_td)
+#     end = html_content.find(last_td, start) + len(last_td)
+
+#     combined_list = html_content[start:end]
+# print(combined_list)
+
+# Op2: original
 combined_list = []
 for td in td_tags:
     td_list = [i for i in td]
     combined_list.extend(td_list)
+print(combined_list)
 
 #colleges
 found_items_college = ""

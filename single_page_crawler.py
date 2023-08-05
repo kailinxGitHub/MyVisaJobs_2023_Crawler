@@ -40,6 +40,7 @@ def cleaning_green_card_applicant_profile(category_raw_list):
         data.append([name, cat_items_name, int(number)])
     print(pd.DataFrame(data, columns=['Company', 'University', 'Number']))
 
+#comment
 # Finding the key content init
 page_url = "https://www.myvisajobs.com/Visa-Sponsor/Amazon-Com-Services/1352502.htm"
 page = requests.get(page_url)

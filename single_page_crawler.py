@@ -8,6 +8,9 @@ import re
 # st.title("Green Card Profile for Amazon,Com Services")
 
 # Functions Library
+def get_fields(html_text):
+    field_matches = re.findall('<td align="right" valign="top">(.*?):</td><td align="left" colspan="3">', html_text)
+    return field_matches
 def cleaning_green_card_applicant_profile(category_raw_list):
     if isinstance(category_raw_list, str):
         list_in_category = list(map(str, category_raw_list.split(";")))
@@ -46,31 +49,43 @@ page = requests.get(page_url)
 soup = BeautifulSoup(page.text, 'html.parser')
 td_tags = soup.find_all('td', attrs={'align': 'right', 'valign': 'top'})
 
-# # Op1: Getting code from start to end
-# if td_tags:
-#     first_td = str(td_tags[0])
-#     last_td = str(td_tags[-1])
+# Op1: Getting code from start to end
+if td_tags:
+    first_td = str(td_tags[0])
+    last_td = td_tags[-1]
 
-#     html_content = str(soup)
-#     start = html_content.find(first_td)
-#     end = html_content.find(last_td, start) + len(last_td)
+    # Use BeautifulSoup's `find_next` method to get the next two 'td' tags regardless of their attributes
+    next_tds = last_td.find_next('td').find_next('td')
+    last_td = str(next_tds)
 
-#     combined_list = html_content[start:end]
-# print(combined_list)
+    html_content = str(soup)
+    start = html_content.find(first_td)
+    end = html_content.find(last_td, start) + len(last_td)
 
-# Op2: original
-combined_list = []
-for td in td_tags:
-    td_list = [i for i in td]
-    combined_list.extend(td_list)
+    combined_list = html_content[start:end]
 print(combined_list)
 
-#colleges
-found_items_college = ""
-for indexposition in combined_list:
-    if "College:" == indexposition:
-        i_index = combined_list.index(indexposition)
-        found_items_college = combined_list[i_index+1]
+# Get and print fields
+# fields = get_fields(combined_list)
+# print(fields)
+# # for field in fields:
+# #     print(field)
+
+
+
+# # Op2: original
+# td_tags = soup.find_all('td')
+# combined_list = []
+# for td in td_tags:
+#     td_list = [i for i in td]
+#     combined_list.extend(td_list)
+
+# #colleges
+# found_items_college = ""
+# for indexposition in combined_list:
+#     if "College:" == indexposition:
+#         i_index = combined_list.index(indexposition)
+#         found_items_college = combined_list[i_index+1]
 # cleaning_green_card_applicant_profile(found_items_college)
 
 

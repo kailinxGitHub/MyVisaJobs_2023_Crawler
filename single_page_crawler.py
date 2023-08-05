@@ -8,17 +8,13 @@ import re
 # st.title("Green Card Profile for Amazon,Com Services")
 
 # Functions Library
-def cleaning_green_card_applicant_profile(category):
-    # if isinstance(category, str):
-    #     list_in_category = list(map(str, category.split(";")))
-    # else:
-    #     list_in_category = []
-
-    #temp
-    list_in_category = ['University Of Southern California(584)', ' Carnegie Mellon University(325)', ' Arizona State University(314)', ' Northeastern University(281)', ' New York University(247)', ' North Carolina State University(232)', ' The University Of Texas At Dallas(174)', ' State University Of New York At Buffalo(161)', ' University Of Florida(154)', ' San Jose State University(152)', ' University Of Texas At Dallas(151)', ' Georgia Institute Of Technology(149)']
-
+def cleaning_green_card_applicant_profile(category_raw_list):
+    if isinstance(category_raw_list, str):
+        list_in_category = list(map(str, category_raw_list.split(";")))
+    else:
+        list_in_category = []
+        
     data = []
-
     # Mapping the items
     organized_list = {}
     for item in list_in_category:
@@ -38,23 +34,14 @@ def cleaning_green_card_applicant_profile(category):
             number = number_match.group()
         else:
             continue
-
-        # # Save the company's data to a CSV file.
-        # # cleaning company name
-        # name = re.sub(' +', ' ', name.strip())
-        # save_company_data_to_csv(name, organized_list)
         
         #temp
         name = "Amazon,Com Services"
         data.append([name, cat_items_name, int(number)])
     print(pd.DataFrame(data, columns=['Company', 'University', 'Number']))
 
-    # Return the data as a pandas DataFrame
-    # return pd.DataFrame(data, columns=['Company', 'University', 'Number'])
-    # return organized_list
-
+# Finding the key content init
 page_url = "https://www.myvisajobs.com/Visa-Sponsor/Amazon-Com-Services/1352502.htm"
-
 page = requests.get(page_url)
 soup = BeautifulSoup(page.text, 'html.parser')
 td_tags = soup.find_all('td')
@@ -72,17 +59,7 @@ for indexposition in combined_list:
     if "College:" == indexposition:
         i_index = combined_list.index(indexposition)
         found_items_college = combined_list[i_index+1]
-# print(found_items_college)
-cleaning_green_card_applicant_profile(found_items_college)
-
-# #
-# found_items_college = ""
-# for indexposition in combined_list:
-#     if "College:" == indexposition:
-#         i_index = combined_list.index(indexposition)
-#         found_items_college = combined_list[i_index+1]
-
-# print(found_items_college)
+# cleaning_green_card_applicant_profile(found_items_college)
 
 
 

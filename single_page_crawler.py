@@ -63,13 +63,13 @@ if td_tags:
     end = html_content.find(last_td, start) + len(last_td)
 
     combined_list = html_content[start:end]
-print(combined_list)
+# print(combined_list)
 
 # Get and print fields
-# fields = get_fields(combined_list)
-# print(fields)
-# # for field in fields:
-# #     print(field)
+fields = get_fields(combined_list)
+print(fields)
+# for field in fields:
+#     print(field)
 
 
 

@@ -59,7 +59,6 @@ for indexposition in combined_list:
     if "College:" == indexposition:
         i_index = combined_list.index(indexposition)
         found_items_college = combined_list[i_index+1]
-# cleaning_green_card_applicant_profile(found_items_college)
 
 
 

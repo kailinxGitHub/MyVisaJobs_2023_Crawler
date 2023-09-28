@@ -193,7 +193,7 @@ def main():
         default_index = companies.index(default_company) if default_company in companies else 0
         company_name = filter_company_placeholder.selectbox("Select a company", companies, index=default_index)
         filtered_data = st.session_state.university_data[st.session_state.university_data['Company'] == company_name]
-        sorted_data = filtered_data.sort_values('Number', ascending=False)  # Corrected column name
+        sorted_data = filtered_data.sort_values('Number', ascending=False)
         filter_company_placeholder.table(sorted_data)
 
         filter_university_placeholder = st
@@ -203,7 +203,7 @@ def main():
         default_index = universities.index(default_university) if default_university in universities else 0
         university_name = filter_university_placeholder.selectbox("Select a university", universities, index=default_index)
         filtered_data_by_university = st.session_state.university_data[st.session_state.university_data['University'] == university_name]
-        sorted_filtered_data_by_university = filtered_data_by_university.sort_values('Number', ascending=False)  # Corrected column name
+        sorted_filtered_data_by_university = filtered_data_by_university.sort_values('Number', ascending=False)
         filter_university_placeholder.table(sorted_filtered_data_by_university)
 
 main()

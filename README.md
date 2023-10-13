@@ -54,6 +54,10 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 This project is intended for educational and research purposes only. It is not affiliated with or endorsed by [My Visa Jobs](https://www.myvisajobs.com/) or any university or organization mentioned in the data.
 
+## Right to Crawl
+
+This crawler project was initiated after researching the website's attitude on crawlers and seeing that only the "/Resume/" path is disallowed(see as follows: [My Visa Jobs robots.txt](https://www.myvisajobs.com/robots.txt)). Thus if My Visa Jobs has any problem with the project please let me know and it will be taken down responsively.
+
 ## Contact
 
 If you encounter any issues or have suggestions for improvements, please open an issue in the repository.

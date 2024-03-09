@@ -4,7 +4,7 @@
 
 ## Description
 
-Welcome to the **MyVisaJobs_2023_Crawler** project! This repository contains a web crawler designed to crawl and analyze Green Card information from myvisajobs.com for each university. The primary objective of this project is to understand the hiring landscape for international students and foreign workers in the United States, focusing particularly on those who have successfully obtained Green Cards. Our analysis covers which universities have the highest number of hires by companies, demonstrating a successful track record in immigration opportunities.
+Welcome to **MyVisaJobs_2023_Crawler** project! This repository contains a web crawler designed to crawl and analyze Green Card information from myvisajobs.com for each university. The primary objective of this project is to understand the hiring landscape for international students and foreign workers in the United States, focusing particularly on those who have successfully obtained Green Cards. Our analysis covers which universities have the highest number of hires by companies, demonstrating a successful track record in immigration opportunities.
 
 ## Features
 

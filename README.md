@@ -2,6 +2,13 @@
 
 [Link to Streamlit App](https://kailinxgithub-myvisajobs-2023-crawl-h1b-university-hires-2n8cdj.streamlit.app/)
 
+---
+## Right to Crawl
+
+This crawler project was initiated after researching the website's attitude on crawlers and seeing that only the "/Resume/" path is disallowed(see as follows: [My Visa Jobs robots.txt](https://www.myvisajobs.com/robots.txt)). Thus if My Visa Jobs 
+has any problem with the project please let me know and it will be taken down responsively.
+---
+
 ## Description
 
 Welcome to **MyVisaJobs_2023_Crawler** project! This repository contains a web crawler designed to crawl and analyze Green Card information from myvisajobs.com for each university. The primary objective of this project is to understand the hiring landscape for international students and foreign workers in the United States, focusing particularly on those who have successfully obtained Green Cards. Our analysis covers which universities have the highest number of hires by companies, demonstrating a successful track record in immigration opportunities.
@@ -53,10 +60,6 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 ## Disclaimer
 
 This project is intended for educational and research purposes only. It is not affiliated with or endorsed by [My Visa Jobs](https://www.myvisajobs.com/) or any university or organization mentioned in the data.
-
-## Right to Crawl
-
-This crawler project was initiated after researching the website's attitude on crawlers and seeing that only the "/Resume/" path is disallowed(see as follows: [My Visa Jobs robots.txt](https://www.myvisajobs.com/robots.txt)). Thus if My Visa Jobs has any problem with the project please let me know and it will be taken down responsively.
 
 ## Contact
 

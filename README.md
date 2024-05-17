@@ -2,7 +2,6 @@
 
 [Link to Streamlit App](https://kailinxgithub-myvisajobs-2023-crawl-h1b-university-hires-2n8cdj.streamlit.app/)
 
----
 ## Right to Crawl
 
 This crawler project was initiated after researching the website's attitude on crawlers and seeing that only the "/Resume/" path is disallowed(see as follows: [My Visa Jobs robots.txt](https://www.myvisajobs.com/robots.txt)). Thus if My Visa Jobs 

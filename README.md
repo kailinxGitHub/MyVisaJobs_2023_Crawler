@@ -1,69 +1,85 @@
-# MyVisaJobs_2023_Crawler
+# MyVisaJobs 2023 Data Analysis Platform
 
-[Link to Streamlit App](https://kailinxgithub-myvisajobs-2023-crawl-h1b-university-hires-2n8cdj.streamlit.app/)
+## Overview
 
-## Right to Crawl
+This project provides a comprehensive data analysis platform for examining employment and immigration patterns among international students and foreign workers in the United States. By analyzing data from myvisajobs.com, we offer insights into university-specific hiring trends and Green Card approval patterns.
 
-This crawler project was initiated after researching the website's attitude on crawlers and seeing that only the "/Resume/" path is disallowed(see as follows: [My Visa Jobs robots.txt](https://www.myvisajobs.com/robots.txt)). Thus if My Visa Jobs 
-has any problem with the project please let me know and it will be taken down responsively.
----
+## Legal Compliance
 
-## Description
+This project operates in compliance with myvisajobs.com's robots.txt specifications, which only restricts crawling of the "/Resume/" path. The project will be promptly modified or discontinued if requested by myvisajobs.com.
 
-Welcome to **MyVisaJobs_2023_Crawler** project! This repository contains a web crawler designed to crawl and analyze Green Card information from myvisajobs.com for each university. The primary objective of this project is to understand the hiring landscape for international students and foreign workers in the United States, focusing particularly on those who have successfully obtained Green Cards. Our analysis covers which universities have the highest number of hires by companies, demonstrating a successful track record in immigration opportunities.
+## Key Features
 
-## Features
+- **Data Collection**: Automated extraction of employment and immigration data from myvisajobs.com
+- **Analytics Dashboard**: Interactive visualization of university-specific hiring patterns
+- **Green Card Analysis**: Detailed tracking of Green Card approvals and employer relationships
+- **University Rankings**: Data-driven assessment of universities based on successful immigration outcomes
 
-- **Data Crawling**: Extracts comprehensive data from myvisajobs.com, including Green Card approvals, employer information, university affiliations, and more.
-- **University Ranking**: Analyzes and ranks universities based on the number of Green Card-holding hires.
+## Technical Requirements
+
+- Python 3.x
+- Streamlit
+- Additional dependencies listed in requirements.txt
 
 ## Installation
 
-Clone the repository:
-
-\`\`\`
+1. Clone the repository:
+```bash
 git clone https://github.com/kailinxGitHub/MyVisaJobs_2023_Crawler.git
-\`\`\`
+```
 
-Change into the project directory:
-
-\`\`\`
+2. Navigate to the project directory:
+```bash
 cd MyVisaJobs_2023_Crawler
-\`\`\`
+```
 
-Install the required packages:
-
-\`\`\`
+3. Install dependencies:
+```bash
 pip install -r requirements.txt
-\`\`\`
+```
 
 ## Usage
 
-
-This project uses Streamlit for its user interface. To run the application, use the following command:
-
-\`\`\`
+Launch the Streamlit application:
+```bash
 streamlit run green_card_university_hires.py
-\`\`\`
+```
 
-Visit the given `localhost:port` in your web browser to interact with the application.
+Access the application through your web browser at the provided localhost address.
 
-## Contribution
+## Project Structure
 
-This is an open-source project. Feel free to fork the project and submit pull requests with your contributions.
+- `green_card_university_hires.py`: Main application file
+- `requirements.txt`: Project dependencies
+- Additional configuration and data files
+
+## Contributing
+
+We welcome contributions to this project. Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request with a clear description of your changes
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/kailinxGitHub/MyVisaJobs_2023_Crawler/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/kailinxGitHub/MyVisaJobs_2023_Crawler/blob/main/LICENSE) file for details.
 
 ## Disclaimer
 
-This project is intended for educational and research purposes only. It is not affiliated with or endorsed by [My Visa Jobs](https://www.myvisajobs.com/) or any university or organization mentioned in the data.
+This project is developed for educational and research purposes. It is not officially affiliated with myvisajobs.com or any educational institutions mentioned in the data.
+
+## Support
+
+For issues, feature requests, or contributions, please:
+- Open an issue in the repository
+- Provide detailed information about your request
+- Include relevant error messages or screenshots when applicable
 
 ## Contact
 
-If you encounter any issues or have suggestions for improvements, please open an issue in the repository.
+For direct inquiries, please open an issue in the repository.
 
 ---
 
-This project is a stepping stone for a data-driven approach to understanding the immigration landscape for international students and foreign workers. We hope that the insights gathered from this project can help individuals, institutions, and companies in making informed decisions.
+This project aims to provide valuable insights into the immigration landscape for international students and foreign workers in the United States, supporting data-driven decision-making for individuals, educational institutions, and employers.
